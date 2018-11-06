@@ -1,0 +1,61 @@
+[
+  {
+    "name": "Dr Robert E Fulton Regional Library",
+    "street": "5090 Abbotts Bridge Rd",
+    "city": "Johns Creek",
+    "state": "GA",
+    "zip": "30005",
+    "url": "http://www.afpls.org/ocee-branch6",
+    "pos": {"lat":34.063110,"lng":-84.209620}
+  },
+    {
+        
+    "name": "Forsyth County Public Library Sharon Branch",
+    "street": "2820 Old Atlanta Rd",
+    "city": "Cumming",
+    "state": "GA",
+    "zip": "30041",
+    "url": "http://www.forsythpl.org/",
+    "pos": {"lat":34.118760,"lng":-84.156560}
+        
+        
+    },
+    {
+        
+    "name": "Northeast Spruill Oaks Library",
+    "street": "9560 Spruill Rd",
+    "city": "Johns Creek",
+    "state": "GA",
+    "zip": "30022",
+    "url": "http://www.afpls.org/northeast-spruill-oaks-branch",
+    "pos": {"lat":34.014160,"lng":-84.224830}
+        
+        
+    },
+    {
+        
+    "name": "Gwinnett County Public Library-Duluth",
+    "street": "3480 Duluth Park Ln NW",
+    "city": "Duluth",
+    "state": "GA",
+    "zip": "30096",
+    "url": "http://www.gwinnettpl.org/",
+    "pos": {"lat":34.000670,"lng":-84.158700}
+        
+        
+    },
+    {
+        
+    "name": "Gwinnett County Public Library-Suwanee",
+    "street": "361 Main St",
+    "city": "Suwanee",
+    "state": "GA",
+    "zip": "30024",
+    "url": "http://www.gwinnettpl.org/",
+    "pos": {"lat":34.057950,"lng":-84.068230}
+        
+        
+    }
+    
+    ]
+
