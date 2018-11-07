@@ -7,15 +7,7 @@ import MyMap from './MyMap.js'
 
 
 class MapDisplay extends React.Component{
-    state={
-        map:null,
-        markers:[],
-        markersprops:[],
-        markersnow:[],
-        markerpropsnow:[],
-        showinfowindow:false
-
-    };
+    
 render(){
     return (
         

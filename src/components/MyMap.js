@@ -3,7 +3,7 @@ import { Component } from "react"
 import { compose, withProps } from "recompose"
 import locations from "../data/locations.json"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow, Map} from "react-google-maps"
-
+import '../App.css'
 
 
         
@@ -11,21 +11,48 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow, Map} from "
 
 class MyMap extends React.Component{
     
-onInfoWindowClose= (marker) => {
+    onInfoWindowClose= (marker) => {
   marker.isOpen=false;
     
     }
+
+
     
     
-    onMarkerClick= (ind) => {
-        
-    document.getElementsByTagName('Marker')[ind].isOpen=true;
+    
+    onMarkerClick= (marker) => {
+         
+       
+        marker.isOpen=true;
+        this.state.markerpos.filter(mp=>mp===marker).map(mp=>mp.isOpen=true);
+          this.setState({});     
+    }
+     
+    
+    filterResults=(evt)=>{
+        var temp;
+        var perm;
+        var ind = document.getElementsByTagName("select")[0].selectedIndex;
+        alert(ind);
+       if(ind === 0)
+           {
+               
+               this.setState({markerpos:locations.map(loc=>Object.assign({},loc,{"isOpen":""}))});
+               
+           }
+        else
+            {
+             perm = this.state.markerpos;
+           temp = this.state.markerpos.splice([ind-1],1);
+           this.setState({markerpos:temp});
+            }
+            
     }
    
   state={
       
          
-          markerpos: locations.map(loc=>Object.assign({},loc,{"isOpen":"false"}))
+          markerpos: locations.map(loc=>Object.assign({},loc,{"isOpen":""}))
           
               
     }
@@ -47,9 +74,10 @@ onInfoWindowClose= (marker) => {
             <Marker
               key={ind}
               position={marker.pos}
-            onClick={this.isOpen=true}          
+               onClick={evt=>this.onMarkerClick(marker)}  
+               
             >
-              {<InfoWindow  onCloseClick={evt=>this.onInfoWindowClose(marker)}><h4>{marker.street+marker.city+marker.state+marker.zip}</h4></InfoWindow>}
+            {marker.isOpen&&<InfoWindow onCloseClick={evt=>this.onInfoWindowClose(marker)}><h4>{marker.street+marker.city+marker.state+marker.zip}</h4></InfoWindow>}
             </Marker>
           )}
 
@@ -60,8 +88,40 @@ onInfoWindowClose= (marker) => {
        
         
     return (
-      
+        
+        <div className="pageContainer">
+        
          
+              <div className='leftpane'> 
+        <ul className="listLocations">
+        <select onChange={evt=>this.filterResults(evt)}> 
+                   
+                    <option>All </option>
+              {this.state.markerpos.map((mk)=>
+    
+                <option>{mk.city +  " " +mk.state} </option>
+    
+    
+                    )}
+        
+                 
+                 </select>
+            
+              
+              {this.state.markerpos.map((mk)=>
+    
+                <li>{mk.city +  " " +mk.state} </li>
+    
+    
+                    )}
+        
+              </ul>
+                 
+                  
+        
+          </div>
+   
+    <div className="rightpane">
       <MyMapComponent
               isMarkerShown="true"
                  googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyA5mPZJgHzfdneW1DELGFyM7tB2Ofxzqdc"
@@ -70,6 +130,10 @@ onInfoWindowClose= (marker) => {
               mapElement={<div style={{ height: `100%` }} />}
                           
       />
+                  
+       </div>
+        
+        </div>
         
         )
 

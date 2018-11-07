@@ -1,4 +1,4 @@
-.App {
+/*.App {
   text-align: center;
 }
 
@@ -21,6 +21,17 @@
 .App-link {
   color: #61dafb;
 }
+*/
+
+html, body, .root {
+  height: 100%;
+}
+body {
+  line-height: 1.5;
+}
+body, .app {
+  background: white;
+}
 .popup{
     
     border:1px;
@@ -31,18 +42,41 @@
     
 }
 .leftpane{
+    float:left;
     width:30%;
-    height:100%;
     background-color: beige;
     color:darkblue;
+    border:1px;
+    display:flex;
+    flex-direction:row;
+}
+.rightpane{
+    float:right;
+    width:70%;
+     background-color: beige;
+    color:darkblue;
+    border:1px;
+   
+}
+
+
+.pageContainer{
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    flex-direction: row;
     
 }
-rightpane{
-    width:70%;
-    height:100%;
-    background-color: white;
-    color:black;
-    
+
+.listLocations
+{
+   list-style-type: none;
+  padding: 0;
+  margin: 0;
+    display:flex;
+    flex-direction: column;
+
+
 }
 
 @keyframes App-logo-spin {
