@@ -19,7 +19,8 @@ class MapDisplay extends React.Component{
 render(){
     return (
         
-        <div> <MyMap /></div>
+           <MyMap />
+        
     )
     
     }

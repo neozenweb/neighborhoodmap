@@ -25,8 +25,11 @@ class App extends React.Component {
      }
   render() {
     return (
-        <div class="app">
+        
+        <div className="app righpane">
             <h1> Libraries Near Me </h1>
+            <div className="leftpane"> </div>
+         
             <MapDisplay
                  lat={this.state.lat}
                 lng={this.state.lng}
@@ -34,6 +37,7 @@ class App extends React.Component {
                 all={this.state.locations}
         
         />
+    
         </div>
         
              

@@ -1,0 +1,76 @@
+export default class Mapa extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      markers: [],
+      isOpen: false
+    }
+  }
+
+componentDidMount() {
+    let list = { restaurants : []}
+    database.ref('..').on('value', restaurants => {
+            restaurants.forEach( restaurant => {
+                    list.restaurants.push({'name': restaurant.key,
+                            'longitude': restaurant.val().lng,
+                            'latitude': restaurant.val().lat}
+
+                        )
+            })
+            this.setState({ markers:  list.restaurants });
+        })
+
+}
+
+onToggleOpen = () => {
+        this.setState({isOpen: !this.state.isOpen})
+    }
+
+render() { 
+
+    const MapWithAMarker = compose(
+    withProps({
+        googleMapURL: "https://maps.googleapis.com/maps/api/js?key=...&v=3.exp&libraries=geometry,drawing,places",
+        loadingElement: <div style={{ height: `100%` }} />,
+        containerElement: <div style={{ height: `400px` }} />,
+        mapElement: <div style={{ height: `100%` }} />
+      }),
+      withScriptjs,
+      withGoogleMap
+    )(props =>
+      <GoogleMap
+        defaultZoom={17}
+        defaultCenter={{ lat: .., lng: ... }}
+      >
+          {props.markers.map(marker => (
+            <Marker
+              key={marker.name}
+              position={{ lat: marker.latitude, lng: marker.longitude }}
+              onClick={this.onToggleOpen}
+            >
+            {this.state.isOpen && <InfoWindow  position={{lat: 37.765703, lng: -122.425640}}
+    visible={true}> onCloseClick={this.onToggleOpen}> marker.key </InfoWindow>}
+            </Marker>
+          ))}
+
+      </GoogleMap>
+    );
+    return (
+        <section id="mapa">
+            <div class= "container">
+            <h3 class="info-title"><span class="info-title-span">Tasty and Convenient.</span></h3>
+                <div class="row">
+                    <div class="col-md-12 text-left">
+
+
+                        <MapWithAMarker markers={this.state.markers}/>
+
+                    </div>
+                </div>
+                <div class="row text-center">
+
+                </div>
+            </div>
+        </section>
+    ) 
+}
