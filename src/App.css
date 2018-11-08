@@ -32,15 +32,7 @@ body {
 body, .app {
   background: white;
 }
-.popup{
-    
-    border:1px;
-    width:50px;
-    height:20px;
-    font-family:sans-serif;
-    font-weight:100;
-    
-}
+
 .leftpane{
     float:left;
     width:30%;
@@ -55,10 +47,16 @@ body, .app {
     width:70%;
      background-color: beige;
     color:darkblue;
-    border:1px;
+   border-style:solid;
    
 }
-
+.title{
+    font-family: serif;
+    font-size:xx-large;
+    background-color: beige;
+    padding-left:50%;
+   
+}
 
 .pageContainer{
     position:relative;
@@ -71,12 +69,12 @@ body, .app {
 .listLocations
 {
    list-style-type: none;
-  padding: 0;
+  padding-left: 30%;
   margin: 0;
+    font-family: serif;
+    font-size:large;
     display:flex;
     flex-direction: column;
-
-
 }
 
 @keyframes App-logo-spin {

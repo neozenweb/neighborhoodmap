@@ -4,6 +4,8 @@ import { compose, withProps } from "recompose"
 import locations from "../data/locations.json"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow, Map} from "react-google-maps"
 import '../App.css'
+import * as LocationsAPI from '../api/LocationsAPI'
+
 
 
         
@@ -21,28 +23,33 @@ class MyMap extends React.Component{
     
     
     onMarkerClick= (marker) => {
+        
+     
+    LocationsAPI.getLoc(marker.pos)
+        .then(res=>alert(marker.name +" is "+res.response.venues[0].location.distance+" miles from your location."))
+             .catch(err=>err)  
          
-       
         marker.isOpen=true;
+        
+        
         this.state.markerpos.filter(mp=>mp===marker).map(mp=>mp.isOpen=true);
-          this.setState({});     
+          this.state.markerpos.filter(mp=>mp===marker).map(mp=>mp.icon="http://maps.google.com/mapfiles/ms/icons/green-dot.png");
+         this.setState({markerpos:this.state.markerpos});     
     }
      
     
     filterResults=(evt)=>{
         var temp;
-        var perm;
         var ind = document.getElementsByTagName("select")[0].selectedIndex;
-        alert(ind);
-       if(ind === 0)
+        if(ind === 0)
            {
                
-               this.setState({markerpos:locations.map(loc=>Object.assign({},loc,{"isOpen":""}))});
+               this.setState({markerpos:locations.map(loc=>Object.assign({},loc,{"isOpen":""},{"icon":"http://maps.google.com/mapfiles/ms/icons/red-dot.png"}))});
                
            }
         else
             {
-             perm = this.state.markerpos;
+             
            temp = this.state.markerpos.splice([ind-1],1);
            this.setState({markerpos:temp});
             }
@@ -52,7 +59,7 @@ class MyMap extends React.Component{
   state={
       
          
-          markerpos: locations.map(loc=>Object.assign({},loc,{"isOpen":""}))
+          markerpos: locations.map(loc=>Object.assign({},loc,{"isOpen":""},{"icon":"http://maps.google.com/mapfiles/ms/icons/red-dot.png"}))
           
               
     }
@@ -67,13 +74,15 @@ class MyMap extends React.Component{
       withScriptjs,withGoogleMap)(props =>
                                  <GoogleMap
                                     defaultZoom={10}
-                                    defaultCenter={{ lat:34.078160,lng:-84.182760,}}
+                                    defaultCenter={{ lat:34.20,lng:-84.14,}}
+                                    
                                  >
         {this.state.markerpos.map((marker,ind)=>
            
             <Marker
               key={ind}
               position={marker.pos}
+              icon={marker.icon}
                onClick={evt=>this.onMarkerClick(marker)}  
                
             >
@@ -90,12 +99,12 @@ class MyMap extends React.Component{
     return (
         
         <div className="pageContainer">
-        
-         
+             
               <div className='leftpane'> 
-        <ul className="listLocations">
-        <select onChange={evt=>this.filterResults(evt)}> 
-                   
+                
+                <ul className="listLocations">
+                <select className="selclass" onChange={evt=>this.filterResults(evt)}> 
+
                     <option>All </option>
               {this.state.markerpos.map((mk)=>
     
@@ -110,7 +119,7 @@ class MyMap extends React.Component{
               
               {this.state.markerpos.map((mk)=>
     
-                <li>{mk.city +  " " +mk.state} </li>
+                <li onClick={evt=>this.onMarkerClick(mk)}>{mk.city +  " " +mk.state} </li>
     
     
                     )}
@@ -121,7 +130,7 @@ class MyMap extends React.Component{
         
           </div>
    
-    <div className="rightpane">
+    <div className="rightpane" aria-label="map" role="application">
       <MyMapComponent
               isMarkerShown="true"
                  googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyA5mPZJgHzfdneW1DELGFyM7tB2Ofxzqdc"

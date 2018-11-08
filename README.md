@@ -1,3 +1,5 @@
+The Neighborhood Map project was created using the create-react-app. Further, a file locations.json is used with data about the nearby locations of a centered location. Google Map API and Foursquare API are used to derive the map of the centered location with the markers of the libraries nearby. The distance of each library is displayed on clicking the marker or the side-menu item. This distance is derived from the Foursquare API.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

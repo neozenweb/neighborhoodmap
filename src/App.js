@@ -27,15 +27,9 @@ class App extends React.Component {
     return (
         
         <div className="app">
-            <h1> Libraries Near Me </h1>
+            <div className="title"> Libraries Near Me </div>
                    
-            <MapDisplay
-                 lat={this.state.lat}
-                lng={this.state.lng}
-                zoom={this.state.zoom}
-                all={this.state.locations}
-        
-        />
+            <MyMap />
     
         </div>
         
