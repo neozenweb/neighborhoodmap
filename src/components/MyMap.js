@@ -4,9 +4,8 @@ import { compose, withProps } from "recompose"
 import locations from "../data/locations.json"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow, Map} from "react-google-maps"
 import '../App.css'
+import * as constants from './ConstFile.js'
 import * as LocationsAPI from '../api/LocationsAPI'
-
-
 
         
 
@@ -33,7 +32,7 @@ class MyMap extends React.Component{
         
         
         this.state.markerpos.filter(mp=>mp===marker).map(mp=>mp.isOpen=true);
-          this.state.markerpos.filter(mp=>mp===marker).map(mp=>mp.icon="http://maps.google.com/mapfiles/ms/icons/green-dot.png");
+          this.state.markerpos.filter(mp=>mp===marker).map(mp=>mp.icon=constants.imgGreen);
          this.setState({markerpos:this.state.markerpos});     
     }
      
@@ -44,7 +43,7 @@ class MyMap extends React.Component{
         if(ind === 0)
            {
                
-               this.setState({markerpos:locations.map(loc=>Object.assign({},loc,{"isOpen":""},{"icon":"http://maps.google.com/mapfiles/ms/icons/red-dot.png"}))});
+               this.setState({markerpos:locations.map(loc=>Object.assign({},loc,{"isOpen":""},{"icon":constants.imgRed}))});
                
            }
         else
@@ -59,7 +58,7 @@ class MyMap extends React.Component{
   state={
       
          
-          markerpos: locations.map(loc=>Object.assign({},loc,{"isOpen":""},{"icon":"http://maps.google.com/mapfiles/ms/icons/red-dot.png"}))
+          markerpos: locations.map(loc=>Object.assign({},loc,{"isOpen":""},{"icon":constants.imgRed}))
           
               
     }
@@ -68,13 +67,13 @@ class MyMap extends React.Component{
         
     render(){
         
-      
+     
        var MyMapComponent  =  compose(    
       withProps({}),
       withScriptjs,withGoogleMap)(props =>
                                  <GoogleMap
-                                    defaultZoom={10}
-                                    defaultCenter={{ lat:34.20,lng:-84.14,}}
+                                    defaultZoom={constants.zoom}
+                                    defaultCenter={{ lat:constants.latitude,lng:constants.longitude}}
                                     
                                  >
         {this.state.markerpos.map((marker,ind)=>
@@ -133,7 +132,7 @@ class MyMap extends React.Component{
     <div className="rightpane" aria-label="map" role="application">
       <MyMapComponent
               isMarkerShown="true"
-                 googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyA5mPZJgHzfdneW1DELGFyM7tB2Ofxzqdc"
+                 googleMapURL={constants.googleURL}
             loadingElement={<div style={{ height: `100%` }} />}
               containerElement={<div style={{ height: `400px` }} />}
               mapElement={<div style={{ height: `100%` }} />}
