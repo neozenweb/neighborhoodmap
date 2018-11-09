@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
+import * as constants from './components/ConstFile.js'
 import locations from './data/locations.json'
 import MyMap from './components/MyMap.js'
 

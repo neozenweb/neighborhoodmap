@@ -7,10 +7,12 @@ import '../App.css'
 import * as constants from './ConstFile.js'
 import * as LocationsAPI from '../api/LocationsAPI'
 
-        
-
+ 
 
 class MyMap extends React.Component{
+    
+    
+
     
     onInfoWindowClose= (marker) => {
   marker.isOpen=false;
@@ -18,19 +20,28 @@ class MyMap extends React.Component{
     }
 
 
-    
-    
+       
     
     onMarkerClick= (marker) => {
         
-     
-    LocationsAPI.getLoc(marker.pos)
+     LocationsAPI.getLoc(marker.pos)
         .then(res=>alert(marker.name +" is "+res.response.venues[0].location.distance+" miles from your location."))
-             .catch(err=>err)  
+             .catch(function(err){
+         
+         
+            var msg=document.createTextNode("Foursquare API Fetch error \n"+ err);
+            var e= document.createElement("p");
+            e.append(msg);
+            e.className="errMessage";
+            document.getElementsByTagName("ul")[0].append(e);
+            
+        
+            })  
          
         marker.isOpen=true;
         
-        
+         this.state.markerpos.map(mp=>mp.isOpen=false);
+          this.state.markerpos.map(mp=>mp.icon=constants.imgRed);
         this.state.markerpos.filter(mp=>mp===marker).map(mp=>mp.isOpen=true);
           this.state.markerpos.filter(mp=>mp===marker).map(mp=>mp.icon=constants.imgGreen);
          this.setState({markerpos:this.state.markerpos});     
@@ -59,11 +70,10 @@ class MyMap extends React.Component{
       
          
           markerpos: locations.map(loc=>Object.assign({},loc,{"isOpen":""},{"icon":constants.imgRed}))
-          
-              
-    }
+         
+        }
     
-            
+    
         
     render(){
         
@@ -74,7 +84,7 @@ class MyMap extends React.Component{
                                  <GoogleMap
                                     defaultZoom={constants.zoom}
                                     defaultCenter={{ lat:constants.latitude,lng:constants.longitude}}
-                                    
+                                  
                                  >
         {this.state.markerpos.map((marker,ind)=>
            
@@ -91,15 +101,17 @@ class MyMap extends React.Component{
 
   
   </GoogleMap>
-);
-            
-       
+
+   )
+   
+   
+   
+      
+        return (
         
-    return (
-        
-        <div className="pageContainer">
+                <div className="pageContainer">
              
-              <div className='leftpane'> 
+                <div className='leftpane'> 
                 
                 <ul className="listLocations">
                 <select className="selclass" onChange={evt=>this.filterResults(evt)}> 
@@ -130,6 +142,7 @@ class MyMap extends React.Component{
           </div>
    
     <div className="rightpane" aria-label="map" role="application">
+       
       <MyMapComponent
               isMarkerShown="true"
                  googleMapURL={constants.googleURL}
@@ -139,14 +152,17 @@ class MyMap extends React.Component{
                           
       />
                   
+
+                  
        </div>
         
         </div>
         
+
         )
 
-        
-    
+       
+
  
  
     

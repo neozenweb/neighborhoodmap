@@ -38,4 +38,16 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+    <script>
+      function gm_authFailure()
+        {
+           
+            var msg=document.createTextNode("Map Key ERROR"+"\n"+document.getElementsByClassName("gm-err-message")[0].innerHTML);
+            var err= document.createElement("p");
+            err.append(msg);
+            err.className="errMessage";
+            document.getElementsByTagName("ul")[0].append(err);
+            
+        }
+    </script>
 </html>

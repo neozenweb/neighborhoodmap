@@ -1,8 +1,6 @@
-
 const api = "https://api.foursquare.com/v2"
 /*Foursquare API for developers is used to extract the distance of the marker from the center location. The client-id, 
 client-key and token 'v' are used to access the data from the API*/
-
 
 let token = localStorage.token
 if (!token)
@@ -23,7 +21,7 @@ fetch(`https://api.foursquare.com/v2/venues/search?ll=${pos.lat},${pos.lng}&clie
     method: 'GET'
     })
     .then(response =>response.json())
-         .catch(err=>alert("ERROR IN FETCH " + err))
+    .catch(err=>err)
 
 
 
