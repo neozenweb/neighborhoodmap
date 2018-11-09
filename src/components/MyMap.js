@@ -114,7 +114,7 @@ class MyMap extends React.Component{
                 <div className='leftpane'> 
                 
                 <ul className="listLocations">
-                <select className="selclass" onChange={evt=>this.filterResults(evt)}> 
+                <select className="selclass"  tabindex='2' onChange={evt=>this.filterResults(evt)}> 
 
                     <option>All </option>
               {this.state.markerpos.map((mk)=>
@@ -130,7 +130,7 @@ class MyMap extends React.Component{
               
               {this.state.markerpos.map((mk)=>
     
-                <li onClick={evt=>this.onMarkerClick(mk)}>{mk.city +  " " +mk.state} </li>
+                <li  tabindex='3' onClick={evt=>this.onMarkerClick(mk)}>{mk.city +  " " +mk.state} </li>
     
     
                     )}
@@ -141,7 +141,7 @@ class MyMap extends React.Component{
         
           </div>
    
-    <div className="rightpane" aria-label="map" role="application">
+    <div className="rightpane" aria-label="map" role="application" tabindex='3'>
        
       <MyMapComponent
               isMarkerShown="true"

@@ -20,7 +20,7 @@ class App extends React.Component {
     return (
         
         <div className="app">
-            <div className="title"> Libraries Near Me </div>
+            <div className="title"  tabindex='1'> Libraries Near Me </div>
                    
             <MyMap />
     
