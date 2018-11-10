@@ -7,7 +7,7 @@ import '../App.css'
 import * as constants from './ConstFile.js'
 import * as LocationsAPI from '../api/LocationsAPI'
 
- 
+ var tabct=2;
 
 class MyMap extends React.Component{
     
@@ -111,10 +111,10 @@ class MyMap extends React.Component{
         
                 <div className="pageContainer">
              
-                <div className='leftpane'> 
+                <div className='leftpane' role="navigation" aria-label="menu"> 
                 
-                <ul className="listLocations">
-                <select className="selclass"  tabindex='2' onChange={evt=>this.filterResults(evt)}> 
+                <ul className="listLocations" role="listbox" aria-label="listlocations">
+                <select className="selclass"  role="listbox" aria-label="selectCity" tabindex='2' onChange={evt=>this.filterResults(evt)}> 
 
                     <option>All </option>
               {this.state.markerpos.map((mk)=>
@@ -128,13 +128,13 @@ class MyMap extends React.Component{
                  </select>
             
               
-              {this.state.markerpos.map((mk)=>
+              {this.state.markerpos.map((mk,index)=>
     
-                <li  tabindex='3' onClick={evt=>this.onMarkerClick(mk)}>{mk.city +  " " +mk.state} </li>
+                <li  tabindex={tabct + index} onClick={evt=>this.onMarkerClick(mk)}>{mk.city +  " " +mk.state} </li>
     
     
-                    )}
-        
+              )}
+                        
               </ul>
                  
                   
